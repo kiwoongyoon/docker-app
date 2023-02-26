@@ -1,0 +1,11 @@
+sudo: required 
+language: generic 
+services: 
+  - docker
+before_install:
+  - echo " start creating an image with dockerfile"
+  - docker build -t yoon/react-app -f Dockerfile.dev .
+script : 
+  - docker run -e CI=true yoon/react-app npm run test -- --coverage
+after_success:
+  - echo "test good"
