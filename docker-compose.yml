@@ -1,0 +1,22 @@
+version: "3"
+services:
+  react:
+    build:
+      context: . 
+      dockerfile: Dockerfile.dev
+    ports:
+     - "3000:3000"
+    volumes:
+     - /usr/src/app/node_modules
+     - ./:/usr/src/app
+    stdin_open: true 
+  tests:
+    build: 
+      context: . 
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/src/app/node_modules
+      - ./:/usr/src/app 
+    command: ["npm", "run", "test"] 
+# docker-compose up 하거나 처음이 아닌 경우는 docker-compose up --build 로 해주기 
+# tests 부분을 더 추가해서 compose 하면 자동으로 되도록 만들기

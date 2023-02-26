@@ -1,0 +1,10 @@
+FROM node:alpine
+WORKDIR /usr/src/app
+COPY package.json ./
+
+RUN npm install 
+COPY ./ ./
+CMD ["npm", "run", "start"]
+# docker run -it -p 3000:3000 -v /usr/src/app/node_modules -v %cd%:/usr/src/app ki/reactapp 으로 it , p를 모두 붙여야 정상실행 된다
+# 또한 볼륨으로 실행해줘야 변경사항이 바로 반영된다 
+# docker build -f Dockerfile.dev ./ 으로 .dev 파일을 갖고 이미지 형성 하도록 코드 입력 ! 
